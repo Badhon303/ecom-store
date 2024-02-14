@@ -1,28 +1,26 @@
-import ProductList from '@/components/product-list'
-import Gallery from '@/components/gallery';
-import Info from '@/components/info';
-import getProduct from '@/actions/get-product';
-import getProducts from '@/actions/get-products';
-import Container from '@/components/ui/container';
+import ProductList from "@/components/product-list"
+import Gallery from "@/components/gallery"
+import Info from "@/components/info"
+import getProduct from "@/actions/get-product"
+import getProducts from "@/actions/get-products"
+import Container from "@/components/ui/container"
 
-export const revalidate = 0;
+// export const revalidate = 0;
 
 interface ProductPageProps {
   params: {
-    productId: string;
-  },
+    productId: string
+  }
 }
 
-const ProductPage: React.FC<ProductPageProps> = async ({ 
-  params
- }) => {
-  const product = await getProduct(params.productId);
-  const suggestedProducts = await getProducts({ 
-    categoryId: product?.category?.id
-  });
+const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
+  const product = await getProduct(params.productId)
+  const suggestedProducts = await getProducts({
+    categoryId: product?.category?.id,
+  })
 
   if (!product) {
-    return null;
+    return null
   }
 
   return (
@@ -39,8 +37,8 @@ const ProductPage: React.FC<ProductPageProps> = async ({
           <ProductList title="Related Items" items={suggestedProducts} />
         </div>
       </Container>
-    </div>  
+    </div>
   )
 }
 
-export default ProductPage;
+export default ProductPage
